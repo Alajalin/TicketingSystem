@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+
+# NuGet
+*.nupkg
+packages/
+
+# Logs
+logs/
+*.log
+
+# Uploads
+wwwroot/uploads/
+
+# Environment
+appsettings.Development.json

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TicketingSystem.API/TicketingSystem.API.csproj" Id="d61b096e-8b2a-40d9-b77c-dc79a2fba688" />
+  <Project Path="TicketingSystem.Core/TicketingSystem.Core.csproj" Id="52caf6ab-6791-4ed3-b3c3-3f20f4b06409" />
+  <Project Path="TicketingSystem.DataAccess/TicketingSystem.DataAccess.csproj" Id="2a07b015-2e94-4f70-90b8-cb1318649ead" />
+</Solution>
