@@ -10,7 +10,7 @@ using TicketingSystem.DataAccess.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog
+
 Log.Logger = new LoggerConfiguration()
 	.ReadFrom.Configuration(builder.Configuration)
 	.WriteTo.Console()
@@ -19,7 +19,7 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-// Controllers
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -49,18 +49,16 @@ builder.Services.AddSwaggerGen(c =>
 	});
 });
 
-// Database
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseSqlServer(builder.Configuration
 		.GetConnectionString("DefaultConnection")));
 
-// Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
-// JWT Authentication
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
@@ -79,18 +77,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// CORS
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAngular", policy =>
 	{
-		policy.WithOrigins("http://localhost:4200")
+		policy.SetIsOriginAllowed(origin =>
+			   origin.StartsWith("http://localhost") ||
+			   origin.StartsWith("https://localhost"))
 			  .AllowAnyHeader()
 			  .AllowAnyMethod();
 	});
 });
 
-// Health Check
 builder.Services.AddHealthChecks()
 	.AddSqlServer(builder.Configuration
 		.GetConnectionString("DefaultConnection")!);
@@ -112,7 +110,7 @@ app.UseStaticFiles();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
-// Auto Migrate Database
+
 using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
