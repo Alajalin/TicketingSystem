@@ -1,0 +1,54 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="card shadow p-4" style="width: 400px;">
+
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">🎫 Ticketing System</h2>
+      <p class="text-muted">Sign in to your account</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onLogin()">
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your email"
+          [(ngModel)]="loginData.emailOrUsername"
+          name="emailOrUsername"
+          required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Enter your password"
+          [(ngModel)]="loginData.password"
+          name="password"
+          required />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="isLoading">
+        {{ isLoading ? 'Signing in...' : 'Sign In' }}
+      </button>
+
+    </form>
+
+    <hr>
+
+    <div class="text-center">
+      <span class="text-muted">New client? </span>
+      <a routerLink="/register" class="text-primary fw-semibold">Register here</a>
+    </div>
+
+  </div>
+</div>

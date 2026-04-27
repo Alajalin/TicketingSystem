@@ -1,0 +1,75 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light py-4">
+  <div class="card shadow p-4" style="width: 450px;">
+
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">🎫 Create Account</h2>
+      <p class="text-muted">Register as a new client</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+    <form (ngSubmit)="onRegister()">
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Full Name</label>
+        <input type="text" class="form-control"
+          placeholder="Enter your full name"
+          [(ngModel)]="registerData.fullName"
+          name="fullName" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Email</label>
+        <input type="email" class="form-control"
+          placeholder="Enter your email"
+          [(ngModel)]="registerData.email"
+          name="email" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Mobile Number</label>
+        <input type="text" class="form-control"
+          placeholder="Enter your mobile number"
+          [(ngModel)]="registerData.mobileNumber"
+          name="mobileNumber" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <input type="password" class="form-control"
+          placeholder="Enter your password"
+          [(ngModel)]="registerData.password"
+          name="password" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Date of Birth</label>
+        <input type="date" class="form-control"
+          [(ngModel)]="registerData.dateOfBirth"
+          name="dateOfBirth" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Address</label>
+        <input type="text" class="form-control"
+          placeholder="Enter your address"
+          [(ngModel)]="registerData.address"
+          name="address" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+        {{ isLoading ? 'Registering...' : 'Register' }}
+      </button>
+
+    </form>
+
+    <hr>
+
+    <div class="text-center">
+      <span class="text-muted">Already have an account? </span>
+      <a routerLink="/login" class="text-primary fw-semibold">Sign in</a>
+    </div>
+
+  </div>
+</div>
